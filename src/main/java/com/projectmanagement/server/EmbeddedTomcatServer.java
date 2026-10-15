@@ -44,6 +44,7 @@ public class EmbeddedTomcatServer {
 
         String contextPath = "/project-management-tool";
         StandardContext ctx = (StandardContext) tomcat.addWebapp(contextPath, webappDir.getAbsolutePath());
+        ctx.setParentClassLoader(EmbeddedTomcatServer.class.getClassLoader());
         ctx.setReloadable(true);
 
         // Configure class resources for JSP compilation and Servlet mapping

@@ -1,0 +1,14 @@
+{
+  "name": "online-project-management-tool",
+  "version": "1.0.0",
+  "description": "Online Project Management Tool - Enterprise Java Servlets & JSP Web Application",
+  "scripts": {
+    "dev": "mvn.cmd exec:java",
+    "start": "mvn.cmd exec:java",
+    "build": "mvn.cmd clean package",
+    "test": "mvn.cmd test"
+  },
+  "keywords": ["java", "servlets", "jsp", "tomcat", "project-management"],
+  "author": "Student Engineering Team",
+  "license": "MIT"
+}

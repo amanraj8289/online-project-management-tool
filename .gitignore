@@ -5,6 +5,8 @@ target/
 # Log files
 *.log
 logs/
+tomcat.*/
+work/
 
 # Package Files
 *.war
