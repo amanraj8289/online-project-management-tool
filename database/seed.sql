@@ -70,7 +70,7 @@ INSERT INTO `project_members` (`project_id`, `user_id`, `joined_at`) VALUES
 (3, 5, NOW()), -- Emily on AI Analytics
 (3, 7, NOW()), -- Sophia on AI Analytics
 (4, 4, NOW()), -- Alex on DB Modernization
-(4, 5, NOW()); -- Emily on DB Modernization
+(4, 5, NOW());
 
 -- --------------------------------------------------------------------
 -- 5. Seed Tasks
@@ -99,31 +99,31 @@ INSERT INTO `tasks` (`id`, `project_id`, `title`, `description`, `assigned_to`, 
 -- 6. Seed Task Comments
 -- --------------------------------------------------------------------
 INSERT INTO `task_comments` (`task_id`, `user_id`, `comment`, `created_at`) VALUES
-(1, 4, 'Docker images have been published to Amazon ECR. Size reduced from 650MB to 180MB using Alpine base.', DATE_SUB(NOW(), INTERVAL 15 DAY)),
-(2, 4, 'Terraform scripts tested in staging VPC. Working on IAM roles for service accounts (IRSA).', DATE_SUB(NOW(), INTERVAL 5 DAY)),
-(2, 2, 'Please ensure security groups restrict direct public access to worker nodes.', DATE_SUB(NOW(), INTERVAL 4 DAY)),
-(3, 5, 'GitHub actions pipeline YAML tested successfully with automated staging deployment.', DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(5, 7, 'Figma prototypes reviewed and approved by product owner. Handoff assets exported.', DATE_SUB(NOW(), INTERVAL 8 DAY)),
-(6, 4, 'Biometric hardware detection implemented. Fallback PIN prompt configured.', DATE_SUB(NOW(), INTERVAL 1 DAY));
+(1, 4, 'Docker images have been published to Amazon ECR. Size reduced from 650MB to 180MB using Alpine base.', CURRENT_TIMESTAMP),
+(2, 4, 'Terraform scripts tested in staging VPC. Working on IAM roles for service accounts (IRSA).', CURRENT_TIMESTAMP),
+(2, 2, 'Please ensure security groups restrict direct public access to worker nodes.', CURRENT_TIMESTAMP),
+(3, 5, 'GitHub actions pipeline YAML tested successfully with automated staging deployment.', CURRENT_TIMESTAMP),
+(5, 7, 'Figma prototypes reviewed and approved by product owner. Handoff assets exported.', CURRENT_TIMESTAMP),
+(6, 4, 'Biometric hardware detection implemented. Fallback PIN prompt configured.', CURRENT_TIMESTAMP);
 
 -- --------------------------------------------------------------------
 -- 7. Seed Activity Logs
 -- --------------------------------------------------------------------
 INSERT INTO `activity_logs` (`user_id`, `project_id`, `task_id`, `action_type`, `description`, `created_at`) VALUES
-(1, NULL, NULL, 'SYSTEM_STARTUP', 'Administrator initialized system configuration and verified database connectivity.', DATE_SUB(NOW(), INTERVAL 30 DAY)),
-(2, 1, NULL, 'PROJECT_CREATED', 'Sarah Jenkins created project "Cloud Infrastructure Migration".', DATE_SUB(NOW(), INTERVAL 25 DAY)),
-(2, 1, 1, 'TASK_CREATED', 'Task "Containerize Spring Boot Microservices" assigned to Alex Rivera.', DATE_SUB(NOW(), INTERVAL 24 DAY)),
-(4, 1, 1, 'TASK_STATUS_UPDATED', 'Alex Rivera changed task status to COMPLETED.', DATE_SUB(NOW(), INTERVAL 15 DAY)),
-(3, 2, NULL, 'PROJECT_CREATED', 'David Miller created project "Mobile Banking Portal Revamp".', DATE_SUB(NOW(), INTERVAL 20 DAY)),
-(3, 2, 6, 'TASK_ASSIGNED', 'Task "Implement Biometric Fingerprint Login" assigned to Alex Rivera.', DATE_SUB(NOW(), INTERVAL 10 DAY)),
-(4, 2, 6, 'TASK_STATUS_UPDATED', 'Alex Rivera changed task status to IN_PROGRESS.', DATE_SUB(NOW(), INTERVAL 2 DAY));
+(1, NULL, NULL, 'SYSTEM_STARTUP', 'Administrator initialized system configuration and verified database connectivity.', CURRENT_TIMESTAMP),
+(2, 1, NULL, 'PROJECT_CREATED', 'Sarah Jenkins created project "Cloud Infrastructure Migration".', CURRENT_TIMESTAMP),
+(2, 1, 1, 'TASK_CREATED', 'Task "Containerize Spring Boot Microservices" assigned to Alex Rivera.', CURRENT_TIMESTAMP),
+(4, 1, 1, 'TASK_STATUS_UPDATED', 'Alex Rivera changed task status to COMPLETED.', CURRENT_TIMESTAMP),
+(3, 2, NULL, 'PROJECT_CREATED', 'David Miller created project "Mobile Banking Portal Revamp".', CURRENT_TIMESTAMP),
+(3, 2, 6, 'TASK_ASSIGNED', 'Task "Implement Biometric Fingerprint Login" assigned to Alex Rivera.', CURRENT_TIMESTAMP),
+(4, 2, 6, 'TASK_STATUS_UPDATED', 'Alex Rivera changed task status to IN_PROGRESS.', CURRENT_TIMESTAMP);
 
 -- --------------------------------------------------------------------
 -- 8. Seed Notifications
 -- --------------------------------------------------------------------
 INSERT INTO `notifications` (`user_id`, `message`, `notification_type`, `is_read`, `created_at`) VALUES
-(4, 'You have been assigned to task: "Configure Terraform EKS Cluster"', 'TASK_ASSIGNED', FALSE, DATE_SUB(NOW(), INTERVAL 5 DAY)),
-(4, 'You have been assigned to task: "Implement Biometric Fingerprint Login"', 'TASK_ASSIGNED', TRUE, DATE_SUB(NOW(), INTERVAL 8 DAY)),
-(5, 'You have been assigned to task: "Implement CI/CD Deployment Pipelines"', 'TASK_ASSIGNED', FALSE, DATE_SUB(NOW(), INTERVAL 3 DAY)),
-(6, 'New task pending QA: "Perform Load & Penetration Testing"', 'TASK_ASSIGNED', FALSE, DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(7, 'Figma wireframes for Mobile Banking Portal Revamp approved.', 'PROJECT_UPDATE', TRUE, DATE_SUB(NOW(), INTERVAL 7 DAY));
+(4, 'You have been assigned to task: "Configure Terraform EKS Cluster"', 'TASK_ASSIGNED', FALSE, CURRENT_TIMESTAMP),
+(4, 'You have been assigned to task: "Implement Biometric Fingerprint Login"', 'TASK_ASSIGNED', TRUE, CURRENT_TIMESTAMP),
+(5, 'You have been assigned to task: "Implement CI/CD Deployment Pipelines"', 'TASK_ASSIGNED', FALSE, CURRENT_TIMESTAMP),
+(6, 'New task pending QA: "Perform Load & Penetration Testing"', 'TASK_ASSIGNED', FALSE, CURRENT_TIMESTAMP),
+(7, 'Figma wireframes for Mobile Banking Portal Revamp approved.', 'PROJECT_UPDATE', TRUE, CURRENT_TIMESTAMP);

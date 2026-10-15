@@ -88,6 +88,17 @@ public class AuthController extends HttpServlet {
             req.setAttribute("errorMessage", e.getMessage());
             req.setAttribute("email", email);
             req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(req, resp);
+        } catch (Exception e) {
+            String errorMsg = e.getMessage();
+            if (errorMsg != null && errorMsg.contains("Access denied")) {
+                req.setAttribute("errorMessage", "Database Access Denied: MySQL rejected the credentials. Please set your correct MySQL password in db.properties.");
+            } else if (errorMsg != null && errorMsg.contains("Communications link failure")) {
+                req.setAttribute("errorMessage", "Database Offline: Unable to connect to MySQL on port 3306. Please ensure MySQL service is running.");
+            } else {
+                req.setAttribute("errorMessage", "Database Connection Error: " + (errorMsg != null ? errorMsg : "Could not connect to database. Please check db.properties."));
+            }
+            req.setAttribute("email", email);
+            req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(req, resp);
         }
     }
 

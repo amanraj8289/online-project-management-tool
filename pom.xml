@@ -66,6 +66,13 @@
             <version>${mysql.version}</version>
         </dependency>
 
+        <!-- H2 Database Engine (Embedded Fallback with MySQL Compatibility Mode) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.224</version>
+        </dependency>
+
         <!-- HikariCP High-Performance Connection Pool -->
         <dependency>
             <groupId>com.zaxxer</groupId>

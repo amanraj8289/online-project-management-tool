@@ -19,6 +19,8 @@ work/
 .tools/
 .env
 db.local.properties
+*.db
+database/*.db
 
 # IDE specific files
 .idea/

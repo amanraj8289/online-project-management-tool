@@ -16,15 +16,39 @@ public final class AppConfig {
     private static final Properties properties = new Properties();
 
     static {
-        try (InputStream is = AppConfig.class.getClassLoader().getResourceAsStream("db.properties")) {
-            if (is != null) {
-                properties.load(is);
-                logger.info("Loaded db.properties successfully.");
-            } else {
-                logger.warn("db.properties not found on classpath, using defaults.");
+        reload();
+    }
+
+    public static synchronized void reload() {
+        properties.clear();
+        java.io.File[] candidateFiles = new java.io.File[] {
+            new java.io.File("db.properties"),
+            new java.io.File("src/main/resources/db.properties")
+        };
+        boolean loaded = false;
+        for (java.io.File f : candidateFiles) {
+            if (f.exists() && f.isFile()) {
+                try (InputStream fis = new java.io.FileInputStream(f)) {
+                    properties.load(fis);
+                    logger.info("Loaded db configuration from: {}", f.getAbsolutePath());
+                    loaded = true;
+                    break;
+                } catch (Exception e) {
+                    logger.warn("Could not read {}: {}", f.getName(), e.getMessage());
+                }
             }
-        } catch (Exception e) {
-            logger.error("Failed to load db.properties: {}", e.getMessage());
+        }
+        if (!loaded) {
+            try (InputStream is = AppConfig.class.getClassLoader().getResourceAsStream("db.properties")) {
+                if (is != null) {
+                    properties.load(is);
+                    logger.info("Loaded db.properties successfully from classpath.");
+                } else {
+                    logger.warn("db.properties not found on classpath, using defaults.");
+                }
+            } catch (Exception e) {
+                logger.error("Failed to load db.properties: {}", e.getMessage());
+            }
         }
     }
 
@@ -77,7 +101,7 @@ public final class AppConfig {
     }
 
     public static String getDbPassword() {
-        return get("db.password", "root");
+        return get("db.password", "");
     }
 
     public static String getDbDriver() {
